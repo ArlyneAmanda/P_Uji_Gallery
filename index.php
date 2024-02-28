@@ -74,7 +74,7 @@
 
     <div class="p-2">
       <div class="d-flex">
-        <img src="assets/taehyung.jpg" class="rounded-circle" alt="account" style="width: 50px;">
+        <!-- <img src="assets/taehyung.jpg" class="rounded-circle" alt="account" style="width: 50px;"> -->
         <div class="ml-2">
           <b>Arlyne Amanda Raihanah</b>
           <span> 27/02/2024</span>
