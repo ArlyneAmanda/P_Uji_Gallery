@@ -68,7 +68,16 @@
       <button class="btn btn-outline-danger"><i class="fas fa-heart"></i> Like</button>
       <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal"><i
           class="fas fa-comment"></i> Comment</button>
-      <div class="like-count mt-1" style="border-bottom: 2px solid #ccc;">11170 likes</div>
+      <div class="like-count mt-1 d-flex" style="border-bottom: 2px solid #ccc;">11170 likes
+          <!-- Tambahkan tautan untuk mengedit album -->
+          <a href="edit_album.php?id=<?= $itemAlbum['foto_id'] ?>" class="text-primary mr-3 ml-auto mb-2" style="font-size: 20px;">
+            <i class="fas fa-edit"></i>
+          </a>
+          <!-- Tambahkan tautan dan tombol untuk menghapus album -->
+          <a href="hapus_album.php?id=<?= $itemAlbum['foto_id'] ?>" class="text-danger mb-2" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
+            <i class="fas fa-trash"></i>
+          </a>
+        </div>
     </div>
     <?php include 'partials/comment.php'; ?>
 
@@ -90,7 +99,16 @@
       <button class="btn btn-outline-danger"><i class="fas fa-heart"></i> Like</button>
       <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal"><i
           class="fas fa-comment"></i> Comment</button>
-      <div class="like-count mt-1" style="border-bottom: 2px solid #ccc;">11170 likes</div>
+      <div class="like-count mt-1 d-flex" style="border-bottom: 2px solid #ccc;">11170 likes
+          <!-- Tambahkan tautan untuk mengedit album -->
+          <a href="edit_album.php?id=<?= $itemAlbum['foto_id'] ?>" class="text-primary mr-3 ml-auto mb-2" style="font-size: 20px;">
+            <i class="fas fa-edit"></i>
+          </a>
+          <!-- Tambahkan tautan dan tombol untuk menghapus album -->
+          <a href="hapus_album.php?id=<?= $itemAlbum['foto_id'] ?>" class="text-danger mb-2" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
+            <i class="fas fa-trash"></i>
+          </a>
+        </div>
     </div>
     <?php include 'partials/comment.php'; ?>
   </div>
