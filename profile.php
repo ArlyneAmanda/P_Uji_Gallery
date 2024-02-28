@@ -198,23 +198,28 @@ require_once('config/koneksi.php');
         </div>
         <div class="modal-body">
           <!-- Form tambah foto bisa ditambahkan di sini -->
-          <form>
+          <form action="aksi/foto/aksi_tambah.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
               <label for="photoFile">Pilih Foto:</label>
-              <input type="file" class="form-control-file" id="photoFile">
+              <input type="file" name="foto" class="form-control-file" id="photoFile">
             </div>
             <div class="form-group">
               <label for="photoCaption">Title:</label>
-              <input type="text" class="form-control" id="photoCaption" placeholder="Masukkan caption foto">
+              <input type="text" name="judulFoto" class="form-control" id="photoCaption"
+                placeholder="Masukkan caption foto">
             </div>
             <div class="mb-3">
               <label for="">Caption :</label>
-              <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+              <textarea class="form-control" name="deskripsiFoto" id="" cols="30" rows="5"></textarea>
             </div>
             <div class="form-group">
               <label for="photoAlbum">Album:</label><br>
-              <select name="" id="" class="form-select">
-                <option value="">Album 1</option>
+              <select name="album" id="" class="form-select">
+                <?php foreach ($dataAlbum as $itemAlbum): ?>
+                  <option value="<?= $itemAlbum['album_id'] ?>">
+                    <?= $itemAlbum['namaAlbum'] ?>
+                  </option>
+                <?php endforeach; ?>
               </select>
             </div>
             <button type="submit" class="btn btn-primary">Upload Foto</button>
