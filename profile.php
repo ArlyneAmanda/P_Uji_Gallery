@@ -7,6 +7,8 @@
   <title>Document</title>
   <!-- Link CSS Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Link Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body {
       margin: 0;
@@ -149,24 +151,36 @@ require_once('config/koneksi.php');
         </div>
       <?php endif;
 
-      // NOTE looping data yang diambil
-      foreach ($dataAlbum as $itemAlbum): ?>
-        <div class="m-2 p-2 border rounded-2">
-          <a href="fotoalbum.php" class="text-dark text-decoration-none">
-            <h5>
-              <?= $itemAlbum['namaAlbum'] ?>
-            </h5>
+        // NOTE looping data yang diambil
+  foreach ($dataAlbum as $itemAlbum): ?>
+    <div class="m-2 p-2 border rounded-2 d-flex justify-content-between align-items-center">
+      <div>
+        <a href="fotoalbum.php" class="text-dark text-decoration-none">
+          <h5>
+            <?= $itemAlbum['namaAlbum'] ?>
+          </h5>
+        </a>
+        <p>
+          <?= $itemAlbum['deskripsi'] ?>
+        </p>
+        <small class="font-italic">
+          <!-- NOTE ubah format tanggal yang tadinya 2024-02-28 menjadi 28 February 2024 -->
+          <?php $tgl = new DateTime($itemAlbum['tanggalDibuat']);
+          echo $tgl->format('d F Y'); ?>
+        </small>
+      </div>
+      <div class="d-flex">
+          <!-- Tambahkan tautan untuk mengedit album -->
+          <a href="edit_album.php?id=<?= $itemAlbum['album_id'] ?>" class="text-primary mr-3" style="font-size: 20px;">
+              <i class="fas fa-edit"></i>
           </a>
-          <p>
-            <?= $itemAlbum['deskripsi'] ?>
-          </p>
-          <small class="font-italic">
-            <!-- NOTE ubah format tanggal yang tadinya 2024-02-28 menjadi 28 February 2024 -->
-            <?php $tgl = new DateTime($itemAlbum['tanggalDibuat']);
-            echo $tgl->format('d F Y'); ?>
-          </small>
-        </div>
-      <?php endforeach; ?>
+          <!-- Tambahkan tautan dan tombol untuk menghapus album -->
+          <a href="hapus_album.php?id=<?= $itemAlbum['album_id'] ?>" class="text-danger mr-3" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
+              <i class="fas fa-trash"></i>
+          </a>
+      </div>
+    </div>
+  <?php endforeach; ?>
 
     </div>
   </div>
