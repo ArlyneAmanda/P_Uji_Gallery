@@ -133,7 +133,7 @@ if (isset($_POST['btn_login'])) {
     <?php
     // if ($failed_message){
     // echo "<p>".$failed_message."</p>";
-    echo "<script>alert('Email atau password Anda salah. Silakan coba lagi!')</script>";
+    // echo "<script>alert('Email atau password Anda salah. Silakan coba lagi!')</script>";
     // }
     ?>
     <!-- Form login -->

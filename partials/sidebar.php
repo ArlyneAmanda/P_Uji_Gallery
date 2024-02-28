@@ -120,7 +120,7 @@
             <li><a href="index.php" class="menu-items">Home</a></li>
             <!-- <li><a href="profile.php" class="menu-items">Profile</a></li> -->
             <li><a href="fotoalbum.php" class="menu-items">Foto Album</a></li>
-            <li><a href="#" class="menu-items">Logout</a></li>
+            <li><a href="aksi/logout.php" class="menu-items">Logout</a></li>
         </ul>
     </nav>
 
