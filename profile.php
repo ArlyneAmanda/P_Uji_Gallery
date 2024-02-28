@@ -88,7 +88,10 @@ require_once('config/koneksi.php');
             <img src="assets/taehyung.jpg" alt="Profile Picture">
         </div> -->
       <div class="biodata">
-        <h2>Arlyne Amanda Raihanah</h2>
+        <h2>
+          <!-- NOTE Panggil nama lengkap dari session -->
+          <?= $_SESSION['namalengkap'] ?>
+        </h2>
         <!-- Tambahkan data biodata lainnya sesuai kebutuhan -->
       </div>
     </div>

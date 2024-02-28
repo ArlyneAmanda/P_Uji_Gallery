@@ -47,7 +47,8 @@
         <div class="d-flex align-items-center">
           <a href="profile.php" class="text-decoration-none text-white">
             <!-- <img src="assets/taehyung.jpg" class="rounded-circle" alt="account" style="width: 40px;"> -->
-            <span class="" style="font-size: 18px;">Arlyne Amanda Raihanah</span>
+            <!-- NOTE Panggil nama lengkap dari session -->
+            <span class="" style="font-size: 18px;"><?= $_SESSION['namalengkap'] ?></span>
           </a>
         </div>
     </main>
