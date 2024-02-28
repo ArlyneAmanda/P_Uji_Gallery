@@ -138,7 +138,7 @@ require_once('config/koneksi.php');
 
       <?php
       // NOTE Ambil data menggunakan function yang dibuat
-      $dataAlbum = query('SELECT * FROM album');
+      $dataAlbum = query("SELECT * FROM album WHERE user_id = '$_SESSION[user_id]'");
 
       // NOTE Cek apakah datanya tidak ada
       if (empty($dataAlbum)): ?>
