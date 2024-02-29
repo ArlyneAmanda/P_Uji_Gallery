@@ -24,6 +24,7 @@ if (isset($_POST['btn_login'])) {
       $_SESSION["user_id"] = $data['user_id'];
       $_SESSION["username"] = $data['username'];
       $_SESSION["namalengkap"] = $data['namalengkap'];
+      $_SESSION["alamat"] = $data['alamat'];
       header('location: ./index.php');
     } else {
       echo "<script>alert('Email atau password Anda salah. Silakan coba lagi!')</script>";

@@ -94,6 +94,10 @@ require_once('config/koneksi.php');
           <!-- NOTE Panggil nama lengkap dari session -->
           <?= $_SESSION['namalengkap'] ?>
         </h2>
+        <p>
+          <!-- NOTE Panggil nama lengkap dari session -->
+          alamat: <?= $_SESSION['alamat'] ?>
+        </p>
         <!-- Tambahkan data biodata lainnya sesuai kebutuhan -->
       </div>
     </div>
@@ -102,6 +106,10 @@ require_once('config/koneksi.php');
         <!-- FIXME data-target tolong dikasih nama yang sesuai -->
         <a href="" class="btn btn-outline-light text-primary" data-toggle="modal" data-target="#commentModal"
           style="font-size: 25px;">+</a>
+          <?php if(isset($_GET['errorFoto'])): ?>
+            <p>coba aja ini mah</p>
+          <?php endif; ?>
+          
         <!-- Modal untuk Album -->
         <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel"
           aria-hidden="true">
@@ -152,6 +160,7 @@ require_once('config/koneksi.php');
       <?php endif;
 
         // NOTE looping data yang diambil
+        $index=0;
   foreach ($dataAlbum as $itemAlbum): ?>
     <div class="m-2 p-2 border rounded-2 d-flex justify-content-between align-items-center">
       <div>
@@ -171,15 +180,49 @@ require_once('config/koneksi.php');
       </div>
       <div class="d-flex">
           <!-- Tambahkan tautan untuk mengedit album -->
-          <a href="edit_album.php?id=<?= $itemAlbum['album_id'] ?>" class="text-primary mr-3" style="font-size: 20px;">
+          <!-- <a href="edit_album.php?id=<?= $itemAlbum['album_id'] ?>" class="text-primary mr-3" style="font-size: 20px;">
               <i class="fas fa-edit"></i>
-          </a>
+          </a> -->
+          <button type="button" class="btn btn-outline-light rounded-pill ml-auto" data-toggle="modal"
+          data-target=<?= "#editPhotoModal" . $index ?> ><i class="fas fa-edit"></i></button>
           <!-- Tambahkan tautan dan tombol untuk menghapus album -->
-          <a href="hapus_album.php?id=<?= $itemAlbum['album_id'] ?>" class="text-danger mr-3" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
+          <a href="aksi/album/aksi_hapus.php?album_id=<?= $itemAlbum['album_id'] ?>" class="text-danger mr-3" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
               <i class="fas fa-trash"></i>
           </a>
       </div>
     </div>
+
+    <!-- Modal untuk Edit Foto -->
+    <div class="modal fade" id=<?= "editPhotoModal" . $index ?> tabindex="-1" role="dialog" aria-labelledby="editPhotoModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addPhotoModalLabel">Edit Album</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Form tambah foto bisa ditambahkan di sini -->
+            <form action="aksi/album/aksi_edit.php" method="POST">
+              <input type="text" hidden name="album_id" value=<?= $itemAlbum['album_id'] ?>>
+              <div class="form-group">
+                <label for="photoCaption">Title:</label>
+                <input type="text" name="nama_album" class="form-control" id="photoCaption"
+                  placeholder="Masukkan caption foto" value="<?= $itemAlbum['namaAlbum'] ?>">
+              </div>
+              <div class="mb-3">
+                <label for="">Caption :</label>
+                <textarea class="form-control" name="deskripsi_album" id="" cols="30" rows="5"><?= $itemAlbum['deskripsi'] ?></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Upload Foto</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php $index++; ?>
   <?php endforeach; ?>
 
     </div>
@@ -214,11 +257,12 @@ require_once('config/koneksi.php');
             </div>
             <div class="form-group">
               <label for="photoAlbum">Album:</label><br>
-              <select name="album" id="" class="form-select">
+              <select name="album" id="" class="form-control">
                 <?php foreach ($dataAlbum as $itemAlbum): ?>
                   <option value="<?= $itemAlbum['album_id'] ?>">
                     <?= $itemAlbum['namaAlbum'] ?>
                   </option>
+
                 <?php endforeach; ?>
               </select>
             </div>
@@ -228,6 +272,9 @@ require_once('config/koneksi.php');
       </div>
     </div>
   </div>
+
+
+  
 
 
 

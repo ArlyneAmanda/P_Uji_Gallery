@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,38 +59,8 @@
           <span class="text-white">&#8592;</span>
         </a>
         Album 1
-        <button type="button" class="btn btn-outline-light rounded-pill ml-auto" data-toggle="modal" data-target="#addPhotoModal">+ Foto</button>
       </header>
-        <div class="m-2 p-2 border rounded-2">
-        <div class="p-2">
-        <div class="d-flex">
-          <!-- <img src="assets/taehyung.jpg" class="rounded-circle" alt="account" style="width: 50px;">  -->
-          <div class="ml-2">
-              <b>Arlyne Amanda Raihanah</b>
-              <span> 27/02/2024</span>
-              <div>taehyung</div>
-          </div>
-        </div>
-        <div class="mb-2 mt-2">
-          <img src="assets/taehyung.jpg" class="w-100" alt="..." style="object-fit: cover; height: 500px; border-radius: 10px;">
-        </div>
-      </div>
-      <div class="action-buttons container mb-4 mt-1" style="">
-        <button class="btn btn-outline-danger"><i class="fas fa-heart"></i> Like</button>
-        <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i> Comment</button>
-        <div class="like-count mt-1 d-flex" style="border-bottom: 2px solid #ccc;">11170 likes
-          <!-- Tambahkan tautan untuk mengedit album -->
-          <a href="edit_album.php?id=<?= $itemAlbum['foto_id'] ?>" class="text-primary mr-3 ml-auto mb-2" style="font-size: 20px;">
-            <i class="fas fa-edit"></i>
-          </a>
-          <!-- Tambahkan tautan dan tombol untuk menghapus album -->
-          <a href="hapus_album.php?id=<?= $itemAlbum['foto_id'] ?>" class="text-danger mb-2" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
-            <i class="fas fa-trash"></i>
-          </a>
-        </div>
-      </div>
-      <?php include 'partials/comment.php'; ?>
-
+    <div class="m-2 p-2 border rounded-2">
       <div class="p-2">
         <div class="d-flex">
           <!-- <img src="assets/taehyung.jpg" class="rounded-circle" alt="account" style="width: 50px;">  -->
@@ -103,7 +74,7 @@
           <img src="assets/taehyung.jpg" class="w-100" alt="..." style="object-fit: cover; height: 500px; border-radius: 10px;">
         </div>
       </div>
-      <div class="action-buttons container mb-4 mt-1" style="">
+      <div class="action-buttons mb-4 mt-1 " style="">
         <button class="btn btn-outline-danger"><i class="fas fa-heart"></i> Like</button>
         <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i> Comment</button>
         <div class="like-count mt-1 d-flex" style="border-bottom: 2px solid #ccc;">11170 likes
@@ -121,37 +92,6 @@
         </div>
     </div>
     
-    <!-- Modal untuk Tambah Foto -->
-    <div class="modal fade" id="addPhotoModal" tabindex="-1" role="dialog" aria-labelledby="addPhotoModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addPhotoModalLabel">Tambah Foto</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Form tambah foto bisa ditambahkan di sini -->
-                    <form>
-                        <div class="form-group">
-                            <label for="photoFile">Pilih Foto:</label>
-                            <input type="file" class="form-control-file" id="photoFile">
-                        </div>
-                        <div class="form-group">
-                            <label for="photoCaption">Title:</label>
-                            <input type="text" class="form-control" id="photoCaption" placeholder="Masukkan caption foto">
-                        </div>
-                        <div class="mb-3">
-                            <label for="">Caption :</label>
-                            <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Upload Foto</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     
     
 
