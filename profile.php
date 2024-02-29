@@ -92,8 +92,11 @@ require_once('config/koneksi.php');
       <div class="biodata">
         <h2>
           <!-- NOTE Panggil nama lengkap dari session -->
-          <?= $_SESSION['namalengkap'] ?>
+          <?= $_SESSION['username'] ?>
         </h2>
+        <h6>
+        <?= $_SESSION['namalengkap'] ?>
+        </h6>
         <p>
           <!-- NOTE Panggil nama lengkap dari session -->
           alamat: <?= $_SESSION['alamat'] ?>
