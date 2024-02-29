@@ -107,7 +107,7 @@ require_once('config/koneksi.php');
         <a href="" class="btn btn-outline-light text-primary" data-toggle="modal" data-target="#commentModal"
           style="font-size: 25px;">+</a>
           <?php if(isset($_GET['errorFoto'])): ?>
-            <p>coba aja ini mah</p>
+            <!-- <p>coba aja ini mah</p> -->
           <?php endif; ?>
           
         <!-- Modal untuk Album -->
@@ -178,20 +178,20 @@ require_once('config/koneksi.php');
           echo $tgl->format('d F Y'); ?>
         </small>
       </div>
-      <div class="d-flex">
+      <div class="d-flex align-items-center pr-3">
           <!-- Tambahkan tautan untuk mengedit album -->
           <!-- <a href="edit_album.php?id=<?= $itemAlbum['album_id'] ?>" class="text-primary mr-3" style="font-size: 20px;">
               <i class="fas fa-edit"></i>
           </a> -->
-          <button type="button" class="btn btn-outline-light rounded-pill ml-auto" data-toggle="modal"
-          data-target=<?= "#editPhotoModal" . $index ?> ><i class="fas fa-edit"></i></button>
+          <a href="" type="button" class="mr-3 text-primary" data-toggle="modal"
+          data-target=<?= "#editPhotoModal" . $index ?>  style="font-size: 20px;"><i class="fas fa-edit"></i></a>
           <!-- Tambahkan tautan dan tombol untuk menghapus album -->
-          <a href="aksi/album/aksi_hapus.php?album_id=<?= $itemAlbum['album_id'] ?>" class="text-danger mr-3" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
+          <a href="aksi/album/aksi_hapus.php?album_id=<?= $itemAlbum['album_id'] ?>" class="text-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
               <i class="fas fa-trash"></i>
           </a>
       </div>
     </div>
-
+    
     <!-- Modal untuk Edit Foto -->
     <div class="modal fade" id=<?= "editPhotoModal" . $index ?> tabindex="-1" role="dialog" aria-labelledby="editPhotoModalLabel"
       aria-hidden="true">
