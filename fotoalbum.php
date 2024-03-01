@@ -99,7 +99,7 @@ $resultGetUserPhoto = mysqli_query($link, $getUserPhotoSql);
           </div>
         </div>
         <div class="action-buttons mb-4 mt-1 " style="">
-          <button class="btn btn-outline-danger"><i class="fas fa-heart"></i> Like</button>
+        <button class="btn btn-outline-danger btn-like" onclick="toggleLike()"><i class="fas fa-heart"></i> Like</button>
           <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i> Comment</button>
           <div class="like-count mt-1 d-flex" style="border-bottom: 2px solid #ccc;"><?php echo $likeCount ?> likes
             <!-- Tambahkan tautan untuk mengedit album -->
@@ -111,6 +111,16 @@ $resultGetUserPhoto = mysqli_query($link, $getUserPhotoSql);
               <i class="fas fa-trash"></i>
             </a>
           </div>
+          <script>
+            function toggleLike() {
+              var likeButton = document.querySelector('.btn-like');
+              likeButton.classList.toggle('btn-danger'); // Toggle the class btn-danger
+              likeButton.classList.toggle('btn-outline-danger'); // Toggle the class btn-outline-danger
+              var heartIcon = likeButton.querySelector('i.fa-heart');
+              heartIcon.classList.toggle('fas'); // Toggle the class fas (solid heart)
+              heartIcon.classList.toggle('far'); // Toggle the class far (regular heart)
+           }
+          </script>
           <?php include 'partials/comment.php'; ?>
         </div>
       </div>
