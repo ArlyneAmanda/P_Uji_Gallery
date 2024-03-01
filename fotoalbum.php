@@ -2,7 +2,8 @@
 // session_start();
 // $user_id = $_SESSION["user_id"];
 include 'config/koneksi.php';
-$getUserPhotoSql = "SELECT * FROM foto INNER JOIN user ON user.user_id = foto.user_id LEFT JOIN likefoto ON likefoto.foto_id = foto.foto_id LEFT JOIN komentarfoto ON komentarfoto.foto_id = foto.foto_id";
+$album_id =$_GET['album_id'];
+$getUserPhotoSql = "SELECT * FROM foto INNER JOIN user ON user.user_id = foto.user_id LEFT JOIN likefoto ON likefoto.foto_id = foto.foto_id LEFT JOIN komentarfoto ON komentarfoto.foto_id = foto.foto_id INNER JOIN album ON album.album_id=foto.album_id WHERE foto.album_id='$album_id'";
 $resultGetUserPhoto = mysqli_query($link, $getUserPhotoSql);
 // var_dump($resultGetUserPhoto);
 // die();
