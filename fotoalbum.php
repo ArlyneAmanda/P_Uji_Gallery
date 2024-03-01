@@ -5,6 +5,8 @@ include 'config/koneksi.php';
 $album_id = $_GET['album_id'];
 $getUserPhotoSql = "SELECT * FROM foto INNER JOIN user ON user.user_id = foto.user_id LEFT JOIN likefoto ON likefoto.foto_id = foto.foto_id LEFT JOIN komentarfoto ON komentarfoto.foto_id = foto.foto_id INNER JOIN album ON album.album_id=foto.album_id WHERE foto.album_id='$album_id'";
 $resultGetUserPhoto = mysqli_query($link, $getUserPhotoSql);
+$nama_album=mysqli_query($link,"SELECT * FROM album WHERE album_id='$album_id'");
+$tampil_nama_album=mysqli_fetch_assoc($nama_album);
 // var_dump($resultGetUserPhoto);
 // die();
 
@@ -70,20 +72,20 @@ $resultGetUserPhoto = mysqli_query($link, $getUserPhotoSql);
 
 <body>
   <?php include 'partials/sidebar.php'; ?>
-  <?php
-  while ($row = mysqli_fetch_array($resultGetUserPhoto)) {
-    $photoId = $row['foto_id'];
-    $getLikeCountSql = "SELECT * FROM likefoto WHERE likefoto.foto_id ='$photoId'";
-    $likesResult = mysqli_query($link, $getLikeCountSql);
-    $likeCount = mysqli_num_rows($likesResult);
-  ?>
-    <div class="w-100">
-      <header class="p-3 d-flex justify-item-center gap-5">
-        <a href="profile.php" class="p=0 bg=transparent mr-2">
-          <span class="text-white">&#8592;</span>
-        </a>
-        <?=$row['namaAlbum']?>
-      </header>
+  <div class="w-100">
+    <header class="p-3 d-flex justify-item-center gap-5">
+      <a href="profile.php" class="p=0 bg=transparent mr-2">
+        <span class="text-white">&#8592;</span>
+      </a>
+      <?= $tampil_nama_album['namaAlbum'] ?>
+    </header>
+    <?php
+    while ($row = mysqli_fetch_array($resultGetUserPhoto)) {
+      $photoId = $row['foto_id'];
+      $getLikeCountSql = "SELECT * FROM likefoto WHERE likefoto.foto_id ='$photoId'";
+      $likesResult = mysqli_query($link, $getLikeCountSql);
+      $likeCount = mysqli_num_rows($likesResult);
+    ?>
       <div class="m-2 p-2 border rounded-2">
         <div class="p-2">
           <div class="d-flex">
@@ -99,7 +101,7 @@ $resultGetUserPhoto = mysqli_query($link, $getUserPhotoSql);
           </div>
         </div>
         <div class="action-buttons mb-4 mt-1 " style="">
-        <button class="btn btn-outline-danger btn-like" onclick="toggleLike()"><i class="fas fa-heart"></i> Like</button>
+          <button class="btn btn-outline-danger btn-like" onclick="toggleLike()"><i class="fas fa-heart"></i> Like</button>
           <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i> Comment</button>
           <div class="like-count mt-1 d-flex" style="border-bottom: 2px solid #ccc;"><?php echo $likeCount ?> likes
             <!-- Tambahkan tautan untuk mengedit album -->
@@ -119,15 +121,15 @@ $resultGetUserPhoto = mysqli_query($link, $getUserPhotoSql);
               var heartIcon = likeButton.querySelector('i.fa-heart');
               heartIcon.classList.toggle('fas'); // Toggle the class fas (solid heart)
               heartIcon.classList.toggle('far'); // Toggle the class far (regular heart)
-           }
-          </script>
+            }
+          </script>
           <?php include 'partials/comment.php'; ?>
         </div>
       </div>
-    </div>
-  <?php
-  }
-  ?>
+    <?php
+    }
+    ?>
+  </div>
 
 
 
