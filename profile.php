@@ -82,8 +82,7 @@ require_once('config/koneksi.php');
         <span class="text-white">&#8592;</span>
       </a>
       Profile
-      <button type="button" class="btn btn-outline-light rounded-pill ml-auto" data-toggle="modal"
-        data-target="#addPhotoModal">+ Foto</button>
+      <button type="button" class="btn btn-outline-light rounded-pill ml-auto" data-toggle="modal" data-target="#addPhotoModal">+ Foto</button>
     </header>
     <div class="profile-container m-5">
       <!-- <div class="profile-picture" style="">
@@ -95,7 +94,7 @@ require_once('config/koneksi.php');
           <?= $_SESSION['username'] ?>
         </h2>
         <h6>
-        <?= $_SESSION['namalengkap'] ?>
+          <?= $_SESSION['namalengkap'] ?>
         </h6>
         <p>
           <!-- NOTE Panggil nama lengkap dari session -->
@@ -107,15 +106,13 @@ require_once('config/koneksi.php');
     <div class="postingan">
       <div class="text-center" style="border-bottom: 2px solid #ccc; border-top: 2px solid #ccc;">
         <!-- FIXME data-target tolong dikasih nama yang sesuai -->
-        <a href="" class="btn btn-outline-light text-primary" data-toggle="modal" data-target="#commentModal"
-          style="font-size: 25px;">+</a>
-          <?php if(isset($_GET['errorFoto'])): ?>
-            <!-- <p>coba aja ini mah</p> -->
-          <?php endif; ?>
-          
+        <a href="" class="btn btn-outline-light text-primary" data-toggle="modal" data-target="#commentModal" style="font-size: 25px;">+</a>
+        <?php if (isset($_GET['errorFoto'])) : ?>
+          <!-- <p>coba aja ini mah</p> -->
+        <?php endif; ?>
+
         <!-- Modal untuk Album -->
-        <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel"
-          aria-hidden="true">
+        <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -154,7 +151,7 @@ require_once('config/koneksi.php');
       $dataAlbum = query("SELECT * FROM album WHERE user_id = '$_SESSION[user_id]'");
 
       // NOTE Cek apakah datanya tidak ada
-      if (empty($dataAlbum)): ?>
+      if (empty($dataAlbum)) : ?>
         <div class="m-2 p-2 border rounded-2">
           <p class="text-center">
             Tidak Ada Data Album
@@ -162,78 +159,74 @@ require_once('config/koneksi.php');
         </div>
       <?php endif;
 
-        // NOTE looping data yang diambil
-        $index=0;
-  foreach ($dataAlbum as $itemAlbum): ?>
-    <div class="m-2 p-2 border rounded-2 d-flex justify-content-between align-items-center">
-      <div>
-        <a href="fotoalbum.php" class="text-dark text-decoration-none">
-          <h5>
-            <?= $itemAlbum['namaAlbum'] ?>
-          </h5>
-        </a>
-        <p>
-          <?= $itemAlbum['deskripsi'] ?>
-        </p>
-        <small class="font-italic">
-          <!-- NOTE ubah format tanggal yang tadinya 2024-02-28 menjadi 28 February 2024 -->
-          <?php $tgl = new DateTime($itemAlbum['tanggalDibuat']);
-          echo $tgl->format('d F Y'); ?>
-        </small>
-      </div>
-      <div class="d-flex align-items-center pr-3">
-          <!-- Tambahkan tautan untuk mengedit album -->
-          <!-- <a href="edit_album.php?id=<?= $itemAlbum['album_id'] ?>" class="text-primary mr-3" style="font-size: 20px;">
+      // NOTE looping data yang diambil
+      $index = 0;
+      foreach ($dataAlbum as $itemAlbum) : ?>
+        <div class="m-2 p-2 border rounded-2 d-flex justify-content-between align-items-center">
+          <div>
+            <a href="fotoalbum.php?album_id=<?=$itemAlbum['album_id']?>" class="text-dark text-decoration-none">
+              <h5>
+                <?= $itemAlbum['namaAlbum'] ?>
+              </h5>
+            </a>
+            <p>
+              <?= $itemAlbum['deskripsi'] ?>
+            </p>
+            <small class="font-italic">
+              <!-- NOTE ubah format tanggal yang tadinya 2024-02-28 menjadi 28 February 2024 -->
+              <?php $tgl = new DateTime($itemAlbum['tanggalDibuat']);
+              echo $tgl->format('d F Y'); ?>
+            </small>
+          </div>
+          <div class="d-flex align-items-center pr-3">
+            <!-- Tambahkan tautan untuk mengedit album -->
+            <!-- <a href="edit_album.php?id=<?= $itemAlbum['album_id'] ?>" class="text-primary mr-3" style="font-size: 20px;">
               <i class="fas fa-edit"></i>
           </a> -->
-          <a href="" type="button" class="mr-3 text-primary" data-toggle="modal"
-          data-target=<?= "#editPhotoModal" . $index ?>  style="font-size: 20px;"><i class="fas fa-edit"></i></a>
-          <!-- Tambahkan tautan dan tombol untuk menghapus album -->
-          <a href="aksi/album/aksi_hapus.php?album_id=<?= $itemAlbum['album_id'] ?>" class="text-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
+            <a href="" type="button" class="mr-3 text-primary" data-toggle="modal" data-target=<?= "#editPhotoModal" . $index ?> style="font-size: 20px;"><i class="fas fa-edit"></i></a>
+            <!-- Tambahkan tautan dan tombol untuk menghapus album -->
+            <a href="aksi/album/aksi_hapus.php?album_id=<?= $itemAlbum['album_id'] ?>" class="text-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
               <i class="fas fa-trash"></i>
-          </a>
-      </div>
-    </div>
-    
-    <!-- Modal untuk Edit Foto -->
-    <div class="modal fade" id=<?= "editPhotoModal" . $index ?> tabindex="-1" role="dialog" aria-labelledby="editPhotoModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="addPhotoModalLabel">Edit Album</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <!-- Form tambah foto bisa ditambahkan di sini -->
-            <form action="aksi/album/aksi_edit.php" method="POST">
-              <input type="text" hidden name="album_id" value=<?= $itemAlbum['album_id'] ?>>
-              <div class="form-group">
-                <label for="photoCaption">Title:</label>
-                <input type="text" name="nama_album" class="form-control" id="photoCaption"
-                  placeholder="Masukkan caption foto" value="<?= $itemAlbum['namaAlbum'] ?>">
-              </div>
-              <div class="mb-3">
-                <label for="">Caption :</label>
-                <textarea class="form-control" name="deskripsi_album" id="" cols="30" rows="5"><?= $itemAlbum['deskripsi'] ?></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Upload Foto</button>
-            </form>
+            </a>
           </div>
         </div>
-      </div>
-    </div>
-    <?php $index++; ?>
-  <?php endforeach; ?>
+
+        <!-- Modal untuk Edit Foto -->
+        <div class="modal fade" id=<?= "editPhotoModal" . $index ?> tabindex="-1" role="dialog" aria-labelledby="editPhotoModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addPhotoModalLabel">Edit Album</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- Form tambah foto bisa ditambahkan di sini -->
+                <form action="aksi/album/aksi_edit.php" method="POST">
+                  <input type="text" hidden name="album_id" value=<?= $itemAlbum['album_id'] ?>>
+                  <div class="form-group">
+                    <label for="photoCaption">Title:</label>
+                    <input type="text" name="nama_album" class="form-control" id="photoCaption" placeholder="Masukkan caption foto" value="<?= $itemAlbum['namaAlbum'] ?>">
+                  </div>
+                  <div class="mb-3">
+                    <label for="">Caption :</label>
+                    <textarea class="form-control" name="deskripsi_album" id="" cols="30" rows="5"><?= $itemAlbum['deskripsi'] ?></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Upload Foto</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php $index++; ?>
+      <?php endforeach; ?>
 
     </div>
   </div>
 
   <!-- Modal untuk Tambah Foto -->
-  <div class="modal fade" id="addPhotoModal" tabindex="-1" role="dialog" aria-labelledby="addPhotoModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="addPhotoModal" tabindex="-1" role="dialog" aria-labelledby="addPhotoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -251,8 +244,7 @@ require_once('config/koneksi.php');
             </div>
             <div class="form-group">
               <label for="photoCaption">Title:</label>
-              <input type="text" name="judulFoto" class="form-control" id="photoCaption"
-                placeholder="Masukkan caption foto">
+              <input type="text" name="judulFoto" class="form-control" id="photoCaption" placeholder="Masukkan caption foto">
             </div>
             <div class="mb-3">
               <label for="">Caption :</label>
@@ -261,7 +253,7 @@ require_once('config/koneksi.php');
             <div class="form-group">
               <label for="photoAlbum">Album:</label><br>
               <select name="album" id="" class="form-control">
-                <?php foreach ($dataAlbum as $itemAlbum): ?>
+                <?php foreach ($dataAlbum as $itemAlbum) : ?>
                   <option value="<?= $itemAlbum['album_id'] ?>">
                     <?= $itemAlbum['namaAlbum'] ?>
                   </option>
@@ -277,7 +269,7 @@ require_once('config/koneksi.php');
   </div>
 
 
-  
+
 
 
 
