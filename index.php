@@ -72,7 +72,7 @@ $sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=use
         <div class="action-buttons container mb-4 mt-1" style="">
           <?php
           $foto_id = $data['foto_id'];
-          $query_like_1 = mysqli_query($link, "SELECT * FROM likefoto,user,foto WHERE likefoto.foto_id=foto.foto_id AND likefoto.user_id=user.user_id AND foto.foto_id='$foto_id' AND user.user_id='$user_id'");
+          $query_like_1 = mysqli_query($link, "SELECT * FROM likefoto,foto,user WHERE likefoto.foto_id=foto.foto_id AND likefoto.user_id=user.user_id AND foto.foto_id='$foto_id' AND user.user_id='$user_id'");
           $result = mysqli_num_rows($query_like_1);
           $komen = mysqli_query($link, "SELECT * FROM komentarfoto,foto WHERE komentarfoto.foto_id=foto.foto_id AND foto.foto_id='$foto_id'");
           $qount_komen = mysqli_num_rows($komen);
@@ -83,7 +83,12 @@ $sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=use
           <?php endif ?>
           <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal<?= $data['foto_id'] ?>"><i class="fas fa-comment"></i> Comment</button>
           <div class="ms-3 komen_li">
-            <span><?= $result ?> Like</span> <br>
+            <span>
+              <?php
+              $like = mysqli_query($link, "SELECT * FROM likefoto,foto WHERE likefoto.foto_id=foto.foto_id AND foto.foto_id='$foto_id'");
+              $qount_like = mysqli_num_rows($like);
+              ?><?=$qount_like?> Like
+            </span> <br>
             <span><?= $qount_komen ?> Comment</span>
           </div>
         </div>
@@ -108,7 +113,7 @@ $sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=use
                   <input type="hidden" name="foto_id" value="<?= $data['foto_id'] ?>" class="form-control" id="comment" placeholder="Komen disini">
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary" >Simpan</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
                 <hr>
                 <?php
@@ -116,7 +121,7 @@ $sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=use
                 $query_komen = mysqli_query($link, "SELECT * FROM komentarfoto,foto,user WHERE komentarfoto.foto_id=foto.foto_id AND komentarfoto.user_id=user.user_id AND foto.foto_id='$foto_id' ");
                 foreach ($query_komen as $data) :
                 ?>
-                  <b style="margin-right: 5px;"><?=$data['username']?></b><?=$data['isiKomentar']?> 
+                  <b style="margin-right: 5px;"><?= $data['username'] ?></b><?= $data['isiKomentar'] ?><br>
                 <?php endforeach ?>
               </div>
             </form>
