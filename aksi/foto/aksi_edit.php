@@ -25,7 +25,7 @@ if (in_array($imageFileType, $allowedExtensions)) {
 
         mysqli_query($link, "UPDATE foto SET judulFoto='$judulFoto' , deskripsiFoto='$deskripsiFoto' , tanggalUnggahan='$tglSekarang' , lokasiFile='$namaFile' WHERE foto_id='$foto_id'");
 
-        header('location: ../../fotoalbum.php?album_id=<?=$album_id?>');
+        header("location: ../../fotoalbum.php?album_id=$album_id");
 
     } else {
         echo "Gagal mengunggah foto.";
