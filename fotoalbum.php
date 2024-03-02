@@ -105,7 +105,7 @@ $tampil_nama_album=mysqli_fetch_assoc($nama_album);
           <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i> Comment</button>
           <div class="like-count mt-1 d-flex" style="border-bottom: 2px solid #ccc;"><?php echo $likeCount ?> likes
             <!-- Tambahkan tautan untuk mengedit album -->
-            <a href="edit_album.php?id=<?= $itemAlbum['album_id'] ?>" class="text-primary mr-3 ml-auto mb-2" style="font-size: 20px;">
+            <a href="aksi/foto/aksi_edit.php?foto_id=<?= $row['foto_id'] ?>" data-toggle="modal" data-target="#addPhotoModal<?=$row['foto_id']?>" class="text-primary mr-3 ml-auto mb-2" style="font-size: 20px;">
               <i class="fas fa-edit"></i>
             </a>
             <!-- Tambahkan tautan dan tombol untuk menghapus album -->
@@ -124,6 +124,37 @@ $tampil_nama_album=mysqli_fetch_assoc($nama_album);
             }
           </script>
           <?php include 'partials/comment.php'; ?>
+          <!-- Modal untuk Tambah Foto -->
+          <div class="modal fade" id="addPhotoModal<?=$row['foto_id']?>" tabindex="-1" role="dialog" aria-labelledby="addPhotoModal<?=$row['foto_id']?>Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addPhotoModal<?=$row['foto_id']?>Label">Tambah Foto</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <!-- Form tambah foto bisa ditambahkan di sini -->
+                  <form action="aksi/foto/aksi_tambah.php" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label for="photoFile">Pilih Foto:</label>
+                      <input type="file" name="foto" class="form-control-file" id="photoFile" value="<?=$row['lokasiFile']?>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="photoCaption">Title:</label>
+                      <input type="text" name="judulFoto" class="form-control" id="photoCaption" placeholder="Masukkan caption foto" value="<?=$row['judulFoto']?>">
+                    </div>
+                    <div class="mb-3">
+                      <label for="">Caption :</label>
+                      <textarea class="form-control" name="deskripsiFoto" id="" cols="30" rows="5"><?=$row['deskripsiFoto']?></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload Foto</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     <?php
