@@ -3,7 +3,7 @@
 // $user_id = $_SESSION["user_id"];
 include 'config/koneksi.php';
 $album_id = $_GET['album_id'];
-$getUserPhotoSql = "SELECT * FROM foto INNER JOIN user ON user.user_id = foto.user_id LEFT JOIN likefoto ON likefoto.foto_id = foto.foto_id LEFT JOIN komentarfoto ON komentarfoto.foto_id = foto.foto_id INNER JOIN album ON album.album_id=foto.album_id WHERE foto.album_id='$album_id'";
+$getUserPhotoSql = "SELECT * FROM foto,album,user WHERE foto.user_id=user.user_id AND foto.album_id=album.album_id AND foto.album_id='$album_id'";
 $resultGetUserPhoto = mysqli_query($link, $getUserPhotoSql);
 $nama_album=mysqli_query($link,"SELECT * FROM album WHERE album_id='$album_id'");
 $tampil_nama_album=mysqli_fetch_assoc($nama_album);
