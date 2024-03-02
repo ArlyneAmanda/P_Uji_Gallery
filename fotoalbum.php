@@ -5,8 +5,8 @@ include 'config/koneksi.php';
 $album_id = $_GET['album_id'];
 $getUserPhotoSql = "SELECT * FROM foto,album,user WHERE foto.user_id=user.user_id AND foto.album_id=album.album_id AND foto.album_id='$album_id'";
 $resultGetUserPhoto = mysqli_query($link, $getUserPhotoSql);
-$nama_album=mysqli_query($link,"SELECT * FROM album WHERE album_id='$album_id'");
-$tampil_nama_album=mysqli_fetch_assoc($nama_album);
+$nama_album = mysqli_query($link, "SELECT * FROM album WHERE album_id='$album_id'");
+$tampil_nama_album = mysqli_fetch_assoc($nama_album);
 // var_dump($resultGetUserPhoto);
 // die();
 
@@ -90,10 +90,17 @@ $tampil_nama_album=mysqli_fetch_assoc($nama_album);
         <div class="p-2">
           <div class="d-flex">
             <!-- <img src="assets/taehyung.jpg" class="rounded-circle" alt="account" style="width: 50px;">  -->
-            <div class="ml-2">
-              <b><?php echo  $row['username']; ?></b>
-              <span><?php echo  $row['tanggalUnggahan']; ?></span>
-              <div><?php echo  $row['deskripsiFoto']; ?></div>
+            <div class="d-flex justify-content-between w-100">
+              <div class="ml-2">
+                <b><?php echo  $row['username']; ?></b>
+                <span><?php echo  $row['tanggalUnggahan']; ?></span>
+                <div><?php echo  $row['deskripsiFoto']; ?></div>
+              </div>
+              <div class="kanan">
+                <a href="aksi/foto/aksi_like.php?aksi=hapus&table=foto&foto_id=<?= $row['foto_id'] ?>&album_id=<?= $row['album_id'] ?>" class="text-danger mb-2" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </div>
             </div>
           </div>
           <div class="mb-2 mt-2">
@@ -101,18 +108,16 @@ $tampil_nama_album=mysqli_fetch_assoc($nama_album);
           </div>
         </div>
         <div class="action-buttons mb-4 mt-1 " style="">
-          <button class="btn btn-outline-danger btn-like" onclick="toggleLike()"><i class="fas fa-heart"></i> Like</button>
-          <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i> Comment</button>
-          <div class="like-count mt-1 d-flex" style="border-bottom: 2px solid #ccc;"><?php echo $likeCount ?> likes
+          <!-- <button class="btn btn-outline-danger btn-like" onclick="toggleLike()"><i class="fas fa-heart"></i> Like</button>
+          <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i> Comment</button> -->
+          <!-- <div class="like-count mt-1 d-flex" style="border-bottom: 2px solid #ccc;"><?php echo $likeCount ?> likes -->
             <!-- Tambahkan tautan untuk mengedit album -->
-            <a href="" data-toggle="modal" data-target="#addPhotoModal<?=$row['foto_id']?>" class="text-primary mr-3 ml-auto mb-2" style="font-size: 20px;">
+            <!-- <a href="" data-toggle="modal" data-target="#addPhotoModal<?= $row['foto_id'] ?>" class="text-primary mr-3 ml-auto mb-2" style="font-size: 20px;">
               <i class="fas fa-edit"></i>
-            </a>
+            </a> -->
             <!-- Tambahkan tautan dan tombol untuk menghapus album -->
-            <a href="hapus_album.php?id=<?= $itemAlbum['album_id'] ?>" class="text-danger mb-2" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
-              <i class="fas fa-trash"></i>
-            </a>
-          </div>
+
+          <!-- </div> -->
           <script>
             function toggleLike() {
               var likeButton = document.querySelector('.btn-like');
@@ -125,11 +130,11 @@ $tampil_nama_album=mysqli_fetch_assoc($nama_album);
           </script>
           <?php include 'partials/comment.php'; ?>
           <!-- Modal untuk Tambah Foto -->
-          <div class="modal fade" id="addPhotoModal<?=$row['foto_id']?>" tabindex="-1" role="dialog" aria-labelledby="addPhotoModal<?=$row['foto_id']?>Label" aria-hidden="true">
+          <div class="modal fade" id="addPhotoModal<?= $row['foto_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="addPhotoModal<?= $row['foto_id'] ?>Label" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="addPhotoModal<?=$row['foto_id']?>Label">Tambah Foto</h5>
+                  <h5 class="modal-title" id="addPhotoModal<?= $row['foto_id'] ?>Label">Tambah Foto</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -140,18 +145,18 @@ $tampil_nama_album=mysqli_fetch_assoc($nama_album);
                     <div class="form-group">
                       <label for="photoFile">Pilih Foto:</label>
                       <input type="file" name="fotobaru" class="form-control-file" id="photoFile">
-                      <input type="hidden" name="foto" class="form-control-file" id="photoFile" value="<?=$row['lokasiFile']?>">
-                      <input type="hidden" name="foto_id" class="form-control-file" id="photoFile" value="<?=$row['foto_id']?>">
-                      <input type="hidden" name="album_id" class="form-control-file" id="photoFile" value="<?=$row['album_id']?>">
-                      <input type="hidden" name="user_id" class="form-control-file" id="photoFile" value="<?=$_SESSION['user_id']?>">
+                      <input type="hidden" name="foto" class="form-control-file" id="photoFile" value="<?= $row['lokasiFile'] ?>">
+                      <input type="hidden" name="foto_id" class="form-control-file" id="photoFile" value="<?= $row['foto_id'] ?>">
+                      <input type="hidden" name="album_id" class="form-control-file" id="photoFile" value="<?= $row['album_id'] ?>">
+                      <input type="hidden" name="user_id" class="form-control-file" id="photoFile" value="<?= $_SESSION['user_id'] ?>">
                     </div>
                     <div class="form-group">
                       <label for="photoCaption">Title:</label>
-                      <input type="text" name="judulFoto" class="form-control" id="photoCaption" placeholder="Masukkan caption foto" value="<?=$row['judulFoto']?>">
+                      <input type="text" name="judulFoto" class="form-control" id="photoCaption" placeholder="Masukkan caption foto" value="<?= $row['judulFoto'] ?>">
                     </div>
                     <div class="mb-3">
                       <label for="">Caption :</label>
-                      <textarea class="form-control" name="deskripsiFoto" id="" cols="30" rows="5"><?=$row['deskripsiFoto']?></textarea>
+                      <textarea class="form-control" name="deskripsiFoto" id="" cols="30" rows="5"><?= $row['deskripsiFoto'] ?></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Upload Foto</button>
                   </form>
