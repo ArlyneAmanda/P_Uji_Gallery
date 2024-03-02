@@ -1,15 +1,36 @@
 <?php
 
-// NOTE untuk Memanggil koneksi
-require_once "../../config/koneksi.php";
+require_once '../../config/koneksi.php';
 
-// NOTE masukin semua data input ke variabel
-$namaAlbum = $_POST['nama_album'];
-$deskripsiAlbum = $_POST['deskripsi_album'];
+$uploadDir = "../../assets/"; // Direktori tempat menyimpan file
+$namaFile = basename($_FILES["fotobaru"]["name"]);
+$uploadFile = $uploadDir . $namaFile;
 
-$album_id = $_POST['album_id'];
+// Periksa apakah file gambar
+$imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
+// Format File yang diharuskan
+$allowedExtensions = array("jpg", "jpeg", "png", "gif");
 
-mysqli_query($link, "UPDATE album SET namaAlbum = '$namaAlbum', deskripsi = '$deskripsiAlbum' WHERE album_id = '$album_id'");
+if (in_array($imageFileType, $allowedExtensions)) {
+    // Pindahkan file ke direktori yang ditentukan
+    if (move_uploaded_file($_FILES["fotobaru"]["tmp_name"], $uploadFile)) {
 
-// NOTE kembali ke halaman profile
-header('location: ../../profile.php');
+        $judulFoto = $_POST['judulFoto'];
+        $deskripsiFoto = $_POST['deskripsiFoto'];
+        $user_id = $_POST['user_id'];
+        $foto_id = $_POST['foto_id'];
+        $album_id = $_POST['album_id'];
+
+        $tglSekarang = date('Y-m-d');
+
+        mysqli_query($link, "UPDATE foto SET judulFoto='$judulFoto' , deskripsiFoto='$deskripsiFoto' , tanggalUnggahan='$tglSekarang' , lokasiFile='$namaFile' WHERE foto_id='$foto_id'");
+
+        header('location: ../../fotoalbum.php?album_id=<?=$album_id?>');
+
+    } else {
+        echo "Gagal mengunggah foto.";
+    }
+} else {
+    echo "Hanya file gambar dengan ekstensi JPG, JPEG, PNG, dan GIF yang diperbolehkan.";
+}
+

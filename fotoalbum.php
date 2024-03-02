@@ -105,7 +105,7 @@ $tampil_nama_album=mysqli_fetch_assoc($nama_album);
           <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i> Comment</button>
           <div class="like-count mt-1 d-flex" style="border-bottom: 2px solid #ccc;"><?php echo $likeCount ?> likes
             <!-- Tambahkan tautan untuk mengedit album -->
-            <a href="aksi/foto/aksi_edit.php?foto_id=<?= $row['foto_id'] ?>" data-toggle="modal" data-target="#addPhotoModal<?=$row['foto_id']?>" class="text-primary mr-3 ml-auto mb-2" style="font-size: 20px;">
+            <a href="" data-toggle="modal" data-target="#addPhotoModal<?=$row['foto_id']?>" class="text-primary mr-3 ml-auto mb-2" style="font-size: 20px;">
               <i class="fas fa-edit"></i>
             </a>
             <!-- Tambahkan tautan dan tombol untuk menghapus album -->
@@ -136,10 +136,14 @@ $tampil_nama_album=mysqli_fetch_assoc($nama_album);
                 </div>
                 <div class="modal-body">
                   <!-- Form tambah foto bisa ditambahkan di sini -->
-                  <form action="aksi/foto/aksi_tambah.php" method="post" enctype="multipart/form-data">
+                  <form action="aksi/foto/aksi_edit.php?foto_id=<?= $row['foto_id'] ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="photoFile">Pilih Foto:</label>
-                      <input type="file" name="foto" class="form-control-file" id="photoFile" value="<?=$row['lokasiFile']?>" required>
+                      <input type="file" name="fotobaru" class="form-control-file" id="photoFile">
+                      <input type="hidden" name="foto" class="form-control-file" id="photoFile" value="<?=$row['lokasiFile']?>">
+                      <input type="hidden" name="foto_id" class="form-control-file" id="photoFile" value="<?=$row['foto_id']?>">
+                      <input type="hidden" name="album_id" class="form-control-file" id="photoFile" value="<?=$row['album_id']?>">
+                      <input type="hidden" name="user_id" class="form-control-file" id="photoFile" value="<?=$_SESSION['user_id']?>">
                     </div>
                     <div class="form-group">
                       <label for="photoCaption">Title:</label>
