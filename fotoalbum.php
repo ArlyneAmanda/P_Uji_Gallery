@@ -18,7 +18,9 @@ $tampil_nama_album = mysqli_fetch_assoc($nama_album);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery - Album</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
   <!-- Link Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
@@ -79,6 +81,13 @@ $tampil_nama_album = mysqli_fetch_assoc($nama_album);
       </a>
       <?= $tampil_nama_album['namaAlbum'] ?>
     </header>
+    <?php if(isset($_GET['berhasil_hapus'])): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <i class="fa-solid fa-check pe-2"></i>
+      Berhasil Hapus Foto
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php endif; ?>
     <?php
     while ($row = mysqli_fetch_array($resultGetUserPhoto)) {
       $photoId = $row['foto_id'];
@@ -111,11 +120,11 @@ $tampil_nama_album = mysqli_fetch_assoc($nama_album);
           <!-- <button class="btn btn-outline-danger btn-like" onclick="toggleLike()"><i class="fas fa-heart"></i> Like</button>
           <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i> Comment</button> -->
           <!-- <div class="like-count mt-1 d-flex" style="border-bottom: 2px solid #ccc;"><?php echo $likeCount ?> likes -->
-            <!-- Tambahkan tautan untuk mengedit album -->
-            <!-- <a href="" data-toggle="modal" data-target="#addPhotoModal<?= $row['foto_id'] ?>" class="text-primary mr-3 ml-auto mb-2" style="font-size: 20px;">
+          <!-- Tambahkan tautan untuk mengedit album -->
+          <!-- <a href="" data-toggle="modal" data-target="#addPhotoModal<?= $row['foto_id'] ?>" class="text-primary mr-3 ml-auto mb-2" style="font-size: 20px;">
               <i class="fas fa-edit"></i>
             </a> -->
-            <!-- Tambahkan tautan dan tombol untuk menghapus album -->
+          <!-- Tambahkan tautan dan tombol untuk menghapus album -->
 
           <!-- </div> -->
           <script>
