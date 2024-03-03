@@ -75,7 +75,7 @@ $tampil_nama_album = mysqli_fetch_assoc($nama_album);
 <body>
   <?php include 'partials/sidebar.php'; ?>
   <div class="w-100">
-    <header class="p-3 d-flex justify-item-center gap-5">
+    <header class="p-3 d-flex justify-item-center gap-1">
       <a href="profile.php" class="p=0 bg=transparent mr-2">
         <span class="text-white">&#8592;</span>
       </a>

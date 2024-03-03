@@ -17,7 +17,7 @@ if (!isset($_SESSION['user_id'])) {
         .right-content {
             background-color: #070F2B;
             color: #fff;
-            padding: 20px;
+            padding: 20px;  
             width: 300px;
             /* Sesuaikan lebar konten kanan sesuai kebutuhan */
         }
@@ -50,19 +50,19 @@ if (!isset($_SESSION['user_id'])) {
 <body>
     <main class="right-content">
         <p>Account</p>
-        <div class="d-flex align-items-center">
-            <a href="profile.php" class="text-decoration-none text-white">
+        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ccc;">
+            <a href="profile.php" class="text-decoration-none text-white" >
                 <!-- <img src="assets/taehyung.jpg" class="rounded-circle" alt="account" style="width: 40px;"> -->
                 <!-- NOTE Panggil nama lengkap dari session -->
                 <?php if (isset($_SESSION['namalengkap'])) : ?>
-                    <span class="" style="font-size: 18px;"><?= $_SESSION['namalengkap'] ?></span><br>
+                    <span class="" style="font-size: 18px;"><?= $_SESSION['namalengkap'] ?></span> (You)<br>
                 <?php endif ?>
             </a><br>
         </div>
         <?php foreach ($baca_semua_user as $data) : ?>
-            <div class="akun mb-2 border">
+            <div class="akun mb-2 mt-2" style="border-bottom: 1px solid #ccc;">
                 <a href="fotouser.php?user_id=<?= $data['user_id'] ?>">
-                    <span class="" style="font-size: 18px;"><?= $data['username'] ?></span><br>
+                    <span class="" style="font-size: 18px; color: white;"><?= $data['username'] ?></span><br>
                 </a>
                 <span class="" style="font-size: 14px;"><?= $data['namalengkap'] ?></span><br>
             </div>

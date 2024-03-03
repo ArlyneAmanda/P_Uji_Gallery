@@ -79,7 +79,7 @@ require_once('config/koneksi.php');
   <?php include 'partials/sidebar.php'; ?>
 
   <div class="w-100">
-    <header class="p-3 d-flex justify-item-center gap-5">
+    <header class="p-3 d-flex justify-item-center gap-1">
       <a href="home.php" class="p=0 bg=transparent mr-2">
         <span class="text-white">&#8592;</span>
       </a>
@@ -275,7 +275,7 @@ require_once('config/koneksi.php');
                     <label for="">Caption :</label>
                     <textarea class="form-control" name="deskripsi_album" id="" cols="30" rows="5"><?= $itemAlbum['deskripsi'] ?></textarea>
                   </div>
-                  <button type="submit" class="btn btn-primary">Upload Foto</button>
+                  <button type="submit" class="btn btn-primary">Edit Album</button>
                 </form>
               </div>
             </div>

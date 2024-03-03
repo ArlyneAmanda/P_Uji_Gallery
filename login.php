@@ -40,115 +40,101 @@ if (isset($_POST['btn_login'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <title>Login Page</title>
   <style>
     body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
-      background-color: #f0f0f0;
-      /* Background color for the entire page */
-
+      background-color: #f8f9fa;
     }
 
-    .login-container {
-      text-align: center;
+    .card-login {
+      max-width: 400px;
+      width: 100%;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-login .card-header {
       background-color: white;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      color: #1B1A55;
+      border-radius: 15px 15px 0 0;
+      text-align: center;
     }
 
-    h2 {
-      color: #333;
-      /* Color for the login heading */
+    .card-login .card-body {
+      padding: 20px;
     }
 
-    form {
-      margin-top: 10px;
-    }
-
-    input {
-      width: 80%;
-      padding: 10px;
+    .form-group {
       margin-bottom: 20px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
     }
 
-    button {
-      background-color: #A367B1;
-      /* Purple color for the login button */
+    .btn-login {
+      background-color: #1B1A55;
       color: white;
-      padding: 10px 20px;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
+      padding: 10px 20px;
       cursor: pointer;
     }
 
-    button:hover {
-      background-color: #5D3587;
-      /* Darker purple color on hover */
-    }
-
-    .register-link {
-      display: block;
-      margin-top: 10px;
-      color: #A367B1;
-      /* Blue color for the registration link */
-      text-decoration: none;
-    }
-
-    .register-link:hover {
-      text-decoration: underline;
-    }
-
-    /* Style for registration button */
-    .register-button {
-      background-color: #A367B1;
-      /* Purple color for the login button */
+    .btn-register {
+      background-color: #070F2B;
       color: white;
-      padding: 10px 20px;
       border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 10px;
+      border-radius: 5px;
+      padding: 10px 20px;
+      /* cursor: pointer; */
     }
 
-    .register-button:hover {
-      background-color: #5D3587;
-      /* Darker blue color on hover */
+    .btn-register:hover {
+      background-color: #1B1A55;
+      color: white;
+    }
+
+    .btn-login:hover {
+      background-color: #070F2B;
+      color: white;
+    }
+
+    .forgot-password {
+      text-align: right;
+      color: #1B1A55;
     }
   </style>
 </head>
 
-<body>
-  <div class="login-container">
-    <h2>Login</h2>
-    <?php
-    // if ($failed_message){
-    // echo "<p>".$failed_message."</p>";
-    // echo "<script>alert('Email atau password Anda salah. Silakan coba lagi!')</script>";
-    // }
-    ?>
-    <!-- Form login -->
-    <form method="POST">
-      <!-- Your login form fields go here -->
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <br>
-      <a href="index.php">Masuk tanpa Login</a> <br>
-      <button type="submit" name="btn_login">Login</button>
-      <a href="registrasi.php" class="register-button">Register</a>
-    </form>
-
+<body class="d-flex align-items-center justify-content-center">
+  <div class="container">
+    <div class="card card-login">
+      <div class="card-header">
+        <h2 class="mb-0">Login</h2>
+      </div>
+      <div class="card-body">
+        <form method="POST">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+          </div>
+          <div class="form-group">
+            <a href="index.php" class="forgot-password">Masuk tanpa Login</a>
+          </div>
+          <button type="submit" name="btn_login" class="btn btn-login btn-block">Login</button>
+          <a href="registrasi.php" class="btn btn-register btn-block">Register</a>
+        </form>
+      </div>
+    </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
