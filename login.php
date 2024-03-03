@@ -25,7 +25,7 @@ if (isset($_POST['btn_login'])) {
       $_SESSION["username"] = $data['username'];
       $_SESSION["namalengkap"] = $data['namalengkap'];
       $_SESSION["alamat"] = $data['alamat'];
-      header('location: ./index.php');
+      header('location: ./home.php');
     } else {
       echo "<script>alert('Email atau password Anda salah. Silakan coba lagi!')</script>";
       // header('location: ./login.php');
@@ -143,6 +143,7 @@ if (isset($_POST['btn_login'])) {
       <input type="text" name="username" placeholder="Username" required>
       <input type="password" name="password" placeholder="Password" required>
       <br>
+      <a href="index.php">Masuk tanpa Login</a> <br>
       <button type="submit" name="btn_login">Login</button>
       <a href="registrasi.php" class="register-button">Register</a>
     </form>

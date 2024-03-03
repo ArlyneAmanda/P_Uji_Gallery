@@ -12,14 +12,14 @@ if ($aksi == 'tambah') {
         $foto_id = $_GET['foto_id'];
         $user_id = $_GET['user_id'];
         mysqli_query($link, "INSERT INTO $table VALUES('','$foto_id','$user_id','$tanggal')");
-        header("Location:../../index.php");
+        header("Location:../../home.php");
     }
     if ($table == 'komentarfoto') {
         $foto_id = $_POST['foto_id'];
         $user_id = $_POST['user_id'];
         $isiKomentar = $_POST['isiKomentar'];
         mysqli_query($link, "INSERT INTO komentarfoto VALUES('','$foto_id','$user_id','$isiKomentar','$tanggal')");
-        header("Location:../../index.php");
+        header("Location:../../home.php");
     }
 }
 if ($aksi == 'hapus') {
@@ -27,7 +27,7 @@ if ($aksi == 'hapus') {
         $foto_id = $_GET['foto_id'];
         $user_id = $_GET['user_id'];
         mysqli_query($link, "DELETE FROM $table WHERE foto_id='$foto_id'");
-        header("Location:../../index.php");
+        header("Location:../../home.php");
     }
     if ($table == 'foto') {
         $foto_id = $_GET['foto_id'];

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,11 +15,12 @@
         .sidebar {
             min-width: 250px;
             max-width: 250px;
-            background-color: #070F2B; /* Mengubah warna latar belakang sidebar */
+            background-color: #070F2B;
+            /* Mengubah warna latar belakang sidebar */
             color: white;
             /* padding-top: 80px; */
             transition: min-width 0.5s, max-width 0.5s;
-            
+
         }
 
         .sidebar.collapsed {
@@ -44,10 +46,10 @@
             margin-bottom: 10px;
             padding: 5px;
             /* margin: 5px; */
-            
+
         }
 
-        li:hover{
+        li:hover {
             color: #000;
             background-color: #9370DB;
             text-decoration: none;
@@ -110,9 +112,10 @@
         }
     </style>
 </head>
+
 <body class="d-flex">
 
-    
+
     <nav class="sidebar p-2">
         <div class="burger-menu" onclick="toggleSidebar()">☰</div>
         <ul class="sidebar-menu">
@@ -120,7 +123,11 @@
             <li><a href="index.php" class="menu-items">Home</a></li>
             <!-- <li><a href="profile.php" class="menu-items">Profile</a></li> -->
             <!-- <li><a href="fotoalbum.php" class="menu-items">Foto Album</a></li> -->
-            <li><a href="aksi/logout.php" class="menu-items">Logout</a></li>
+            <?php if (!isset($_SESSION['username'])) : ?>
+                <li><a href="login.php" class="menu-items">Login</a></li>
+            <?php else : ?>
+                <li><a href="aksi/logout.php" class="menu-items">Logout</a></li>
+            <?php endif; ?>
         </ul>
     </nav>
 
@@ -135,4 +142,5 @@
     </script>
 
 </body>
+
 </html>

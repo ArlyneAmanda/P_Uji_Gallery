@@ -1,6 +1,10 @@
 <?php
 include 'config/koneksi.php';
-$sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=user.user_id AND foto.album_id=album.album_id ORDER BY foto.tanggalUnggahan DESC");
+$user_id = $_SESSION['user_id'];
+if(!isset($_SESSION['user_id'])){
+header('Location:login.php');
+}
+$sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=user.user_id AND foto.album_id=album.album_id ORDER BY foto.tanggalUnggahan AND foto.user_id='$user_id' DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,14 +75,14 @@ $sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=use
         <div class="action-buttons container mb-4 mt-1" style="">
           <?php
           $foto_id = $data['foto_id'];
-          $query_like_1 = mysqli_query($link, "SELECT * FROM likefoto,foto,user WHERE likefoto.foto_id=foto.foto_id AND likefoto.user_id=user.user_id AND foto.foto_id='$foto_id'");
+          $query_like_1 = mysqli_query($link, "SELECT * FROM likefoto,foto,user WHERE likefoto.foto_id=foto.foto_id AND likefoto.user_id=user.user_id AND foto.foto_id='$foto_id' AND user.user_id='$user_id'");
           $result = mysqli_num_rows($query_like_1);
           $komen = mysqli_query($link, "SELECT * FROM komentarfoto,foto WHERE komentarfoto.foto_id=foto.foto_id AND foto.foto_id='$foto_id'");
           $qount_komen = mysqli_num_rows($komen);
           if ($result >= 1) : ?>
-            <a href="login.php" class="btn btn-outline-danger btn-like"><i class="fas fa-heart"></i> Like</a>
+            <a href="aksi/foto/aksi_like.php?aksi=hapus&table=likefoto&foto_id=<?= $data['foto_id'] ?>&user_id=<?= $user_id ?>" class="btn btn-outline-danger btn-like"><i class="fas fa-heart"></i> Like</a>
           <?php else : ?>
-            <a href="login.php" class="btn btn-outline-danger btn-like"><i class="fas fa-heart"></i> belum Like</a>
+            <a href="aksi/foto/aksi_like.php?aksi=tambah&table=likefoto&foto_id=<?= $data['foto_id'] ?>&user_id=<?= $user_id ?>" class="btn btn-outline-danger btn-like"><i class="fas fa-heart"></i> belum Like</a>
           <?php endif ?>
           <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal<?= $data['foto_id'] ?>"><i class="fas fa-comment"></i> Comment</button>
           <div class="ms-3 komen_li">
@@ -102,7 +106,7 @@ $sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=use
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form action="login.php" method="post">
+            <form action="aksi/foto/aksi_like.php?aksi=tambah&table=komentarfoto" method="post">
               <div class="modal-body">
                 <!-- Isi komentar atau form komentar dapat ditambahkan di sini -->
                 <div class="form-group">

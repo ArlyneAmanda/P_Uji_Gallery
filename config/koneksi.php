@@ -3,7 +3,7 @@
 // NOTE Untuk ngerun session
 session_start();
 
-$link = mysqli_connect('localhost', 'root', '', 'uji_gallery');
+$link = mysqli_connect('localhost', 'root', '', 'temen_arline');
 
 // NOTE Buat function untuk ngambil data secara efisien, $sql itu namanya parameter
 function query($sql)
