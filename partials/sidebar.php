@@ -120,13 +120,14 @@
         <div class="burger-menu" onclick="toggleSidebar()">☰</div>
         <ul class="sidebar-menu">
             <!-- <div class="logo my-4">Logo</div> -->
-            <li><a href="index.php" class="menu-items">Home</a></li>
             <!-- <li><a href="profile.php" class="menu-items">Profile</a></li> -->
             <!-- <li><a href="fotoalbum.php" class="menu-items">Foto Album</a></li> -->
             <?php if (!isset($_SESSION['username'])) : ?>
+                <li><a href="index.php" class="menu-items">Home</a></li>
                 <li><a href="login.php" class="menu-items">Login</a></li>
-            <?php else : ?>
-                <li><a href="aksi/logout.php" class="menu-items">Logout</a></li>
+                <?php else : ?>
+                    <li><a href="home.php" class="menu-items">Home</a></li>
+                    <li><a href="aksi/logout.php" class="menu-items">Logout</a></li>
             <?php endif; ?>
         </ul>
     </nav>

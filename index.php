@@ -50,9 +50,6 @@ $sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=use
   <?php include 'partials/sidebar.php' ?>
   <div class="w-75">
     <header class="p-3 d-flex justify-item-center gap-5">
-      <a href="" class="p=0 bg=transparent mr-2">
-        <span class="text-white">&#8592;</span>
-      </a>
       Home
     </header>
     <?php foreach ($sql as $data) : ?>

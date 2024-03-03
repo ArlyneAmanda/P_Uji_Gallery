@@ -78,7 +78,7 @@ require_once('config/koneksi.php');
 
   <div class="w-100">
     <header class="p-3 d-flex justify-item-center gap-5">
-      <a href="" class="p=0 bg=transparent mr-2">
+      <a href="home.php" class="p=0 bg=transparent mr-2">
         <span class="text-white">&#8592;</span>
       </a>
       Profile
