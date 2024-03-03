@@ -24,7 +24,7 @@ if (in_array($imageFileType, $allowedExtensions)) {
 
         mysqli_query($link, "INSERT INTO foto VALUES (NULL, '$judulFoto', '$deskripsiFoto', '$tglSekarang', '$namaFile', '$album_id', '$user_id')");
 
-        header('location: ../../profile.php');
+        header('location: ../../profile.php?berhasil_tambah_foto');
 
     } else {
         echo "Gagal mengunggah foto.";

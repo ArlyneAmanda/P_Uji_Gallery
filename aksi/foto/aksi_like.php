@@ -38,6 +38,6 @@ if ($aksi == 'hapus') {
         mysqli_query($link, "DELETE FROM likefoto WHERE foto_id='$foto_id'");
         mysqli_query($link, "DELETE FROM komentarfoto WHERE foto_id='$foto_id'");
         mysqli_query($link, "DELETE FROM $table WHERE foto_id='$foto_id'");
-        header("Location:../../fotoalbum.php?album_id=$album_id");
+        header("Location:../../fotoalbum.php?album_id=$album_id&berhasil_hapus");
     }
 }

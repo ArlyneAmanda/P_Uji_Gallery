@@ -12,4 +12,4 @@ $album_id = $_POST['album_id'];
 mysqli_query($link, "UPDATE album SET namaAlbum = '$namaAlbum', deskripsi = '$deskripsiAlbum' WHERE album_id = '$album_id'");
 
 // NOTE kembali ke halaman profile
-header('location: ../../profile.php');
+header('location: ../../profile.php?berhasil_edit');

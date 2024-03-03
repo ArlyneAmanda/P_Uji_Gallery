@@ -32,5 +32,5 @@ if(count($dataFoto) != 0){
 mysqli_query($link, "DELETE FROM album WHERE album_id = $album_id");
 
 // NOTE kembali ke halaman profile
-header('location: ../../profile.php');
+header('location: ../../profile.php?berhasil_hapus');
 

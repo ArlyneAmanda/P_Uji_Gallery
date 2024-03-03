@@ -15,4 +15,4 @@ $tglSekarang = date('Y-m-d');
 mysqli_query($link, "INSERT INTO album VALUES (NULL, '$namaAlbum', '$deskripsiAlbum', '$tglSekarang', '$idUser')");
 
 // NOTE kembali ke halaman profile
-header('location: ../../profile.php');
+header('location: ../../profile.php?berhasil_tambah');
