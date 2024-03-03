@@ -61,7 +61,7 @@ $sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=use
         <div class="d-flex">
           <!-- <img src="assets/taehyung.jpg" class="rounded-circle" alt="account" style="width: 50px;">  -->
           <div class="ml-2">
-            <a href="fotouser.php?user_id=<?=$data['user_id']?>">
+            <a href="fotouser.php?user_id=<?=$data['user_id']?>"  style="color: black;">
             <b><?= $data['username'] ?></b>
             </a>
             <span><?= $data['tanggalUnggahan'] ?></span>

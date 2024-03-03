@@ -20,91 +20,102 @@ if (isset($_POST['btn_register'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Registration Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Login Page</title>
   <style>
     body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
-      background-color: #f0f0f0; /* Background color for the entire page */
+      background-color: #f8f9fa;
     }
 
-    .registration-container {
-      text-align: center;
-      background-color: white;
-      padding: 80px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      color: #333; /* Color for the registration heading */
-    }
-
-    form {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    input {
-      width: 150%;
-      padding: 10px;
-      margin-bottom: 20px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    button {
-      background-color: #A367B1; /* Purple color for the registration button */
-      color: white;
-      padding: 10px 20px;
+    .card-login {
+      max-width: 400px;
+      width: 100%;
       border: none;
-      border-radius: 4px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-login .card-header {
+      background-color: white;
+      color: #1B1A55;
+      border-radius: 15px 15px 0 0;
+      text-align: center;
+    }
+
+    .card-login .card-body {
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .btn-register {
+      background-color: #1B1A55;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
       cursor: pointer;
     }
 
-    button:hover {
-      background-color: #5D3587; /* Darker purple color on hover */
+    .btn-register:hover {
+      background-color: #070F2B;
+      color: white;
     }
 
-    /* Style for login link */
-    .login-link {
-      display: block;
-      margin-top: 10px;
-      color: #A367B1; /* Purple color for the login link */
-      text-decoration: none;
-    }
-
-    .login-link:hover {
-      text-decoration: underline;
+    .forgot-password {
+      text-align: right;
+      color: #1B1A55;
     }
   </style>
 </head>
-<body>
-  <div class="registration-container">
-    <h2>Registrasi Akun</h2>
-    <!-- Registration form -->
-    <form method="POST">
-      <!-- Registration form fields go here -->
-      <input type="text" name="namalengkap" placeholder="Full Name" required>
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="text" name="alamat" placeholder="Alamat" required>
-      <br>
-      <button type="submit" name="btn_register">Register</button>
-      <!-- Link to login page with styled button -->
-      <a href="login.php" class="login-link">Sudah Punya Akun? Login</a>
-    </form>
+
+<body class="d-flex align-items-center justify-content-center">
+  <div class="container">
+    <div class="card card-login">
+      <div class="card-header">
+        <h2 class="mb-0">Registrasi Akun</h2>
+      </div>
+      <div class="card-body">
+        <form method="POST">
+          <div class="form-group">
+            <label for="namalengkap">Nama Lengkap</label>
+            <input type="text" class="form-control" id="namalengkap" name="namalengkap" placeholder="Masukan Nama Lengkap" required>
+          </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Masukan username" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Masukan password" required>
+          </div>
+          <div class="form-group">
+            <label for="email">email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Masukan email" required>
+          </div>
+          <div class="form-group">
+            <label for="alamat">alamat</label>
+            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukan alamat" required>
+          </div>
+          <div class="form-group">
+            <a href="login.php" class="forgot-password">Sudah punya akun? Login</a>
+          </div>
+          <button type="submit" name="btn_register" class="btn btn-register btn-block">Registrasi</button>
+        </form>
+      </div>
+    </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
