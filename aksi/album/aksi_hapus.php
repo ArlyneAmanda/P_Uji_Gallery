@@ -3,7 +3,7 @@
 // NOTE untuk Memanggil koneksi
 require_once "../../config/koneksi.php";
 
-$album_id = $_GET['album_id'];
+$album_id = $_POST['album_id'];
 
 $dataFoto = query("SELECT * FROM foto WHERE album_id = $album_id");
 
@@ -24,6 +24,7 @@ if(count($dataFoto) != 0){
             mysqli_query($link, "DELETE FROM komentarFoto WHERE `foto_id` = $id");
         }
 
+        unlink("../../assets/".$dataFoto[$i]['lokasiFile']);
         mysqli_query($link, "DELETE FROM foto WHERE `foto_id` = $id");
     }
 

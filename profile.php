@@ -150,34 +150,34 @@ require_once('config/koneksi.php');
       <?php if (isset($_GET['berhasil_tambah'])) : ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <i class="fa-solid fa-check pe-2"></i>
-            Berhasil Tambah Album
+          Berhasil Tambah Album
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <?php endif; ?>
       <?php if (isset($_GET['berhasil_tambah_foto'])) : ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <i class="fa-solid fa-check pe-2"></i>
-            Berhasil Tambah Foto
+          Berhasil Tambah Foto
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <?php endif; ?>
       <?php if (isset($_GET['berhasil_hapus'])) : ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <i class="fa-solid fa-check pe-2"></i>
-            Berhasil Hapus Album
+          Berhasil Hapus Album
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <?php endif; ?>
       <?php if (isset($_GET['berhasil_edit'])) : ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <i class="fa-solid fa-check pe-2"></i>
-            Berhasil Edit Album
+          Berhasil Edit Album
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <?php endif; ?>
       <?php
       // NOTE Ambil data menggunakan function yang dibuat
-      $dataAlbum = query("SELECT * FROM album WHERE user_id = '$_SESSION[user_id]'");
+      $dataAlbum = query("SELECT * FROM album  WHERE album.user_id = '$_SESSION[user_id]'");
 
       // NOTE Cek apakah datanya tidak ada
       if (empty($dataAlbum)) : ?>
@@ -214,12 +214,45 @@ require_once('config/koneksi.php');
           </a> -->
             <a href="" type="button" class="mr-3 text-primary" data-toggle="modal" data-target=<?= "#editPhotoModal" . $index ?> style="font-size: 20px;"><i class="fas fa-edit"></i></a>
             <!-- Tambahkan tautan dan tombol untuk menghapus album -->
-            <a href="aksi/album/aksi_hapus.php?album_id=<?= $itemAlbum['album_id'] ?>" class="text-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus album ini?')" style="font-size: 20px;">
+            <a href="aksi/album/aksi_hapus.php?album_id=<?= $itemAlbum['album_id'] ?>" class="text-danger" data-bs-toggle="modal" data-bs-target="#hapus_album<?= $itemAlbum['album_id'] ?>" style="font-size: 20px;">
               <i class="fas fa-trash"></i>
             </a>
           </div>
         </div>
 
+        <!-- Modal Hapus Album -->
+        <div class="modal fade" id="hapus_album<?= $itemAlbum['album_id'] ?>" tabindex="-1" aria-labelledby="hapus_album<?= $itemAlbum['album_id'] ?>Label" aria-hidden="true">
+          <div class="modal-dialog">
+            <form action="aksi/album/aksi_hapus.php" method="post">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="hapus_album<?= $itemAlbum['album_id'] ?>Label">Hapus Album</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                  <input type="hidden" name="album_id" value="<?= $itemAlbum['album_id'] ?>">
+                  <span>
+                    Yakin mau menghapus <b><?= $itemAlbum['namaAlbum'] ?></b> beserta foto fotonya <br>
+                    Foto dalam Album : <br>
+                    <div class="d-flex flex-wrap justify-content-center">
+                      <?php
+                      $album_id = $itemAlbum['album_id'];
+                      $baca_foto = mysqli_query($link, "SELECT * FROM foto WHERE album_id='$album_id'");
+                      foreach ($baca_foto as $data_foto) : ?>
+                        <img src="assets/<?= $data_foto['lokasiFile'] ?>" height="150px" class="me-1" alt="">
+                      <?php endforeach ?>
+                    </div>
+                  </span>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
         <!-- Modal untuk Edit Foto -->
         <div class="modal fade" id=<?= "editPhotoModal" . $index ?> tabindex="-1" role="dialog" aria-labelledby="editPhotoModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
