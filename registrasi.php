@@ -3,17 +3,17 @@
 include 'config/koneksi.php';
 
 if (isset($_POST['btn_register'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
-    $namalengkap = $_POST ['namalengkap'];
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $alamat = $_POST ['alamat'];
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $email = $_POST['email'];
+  $namalengkap = $_POST['namalengkap'];
+  $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+  $alamat = $_POST['alamat'];
 
-    // menambahkan data ke tabel user
-    $sql = "INSERT INTO user(username,password,email,namalengkap,alamat) VALUES ('$username', '$hashed_password', '$email','$namalengkap','$alamat')";
-    mysqli_query($link, $sql);
-    header('location: ./login.php');
+  // menambahkan data ke tabel user
+  $sql = "INSERT INTO user(username,password,email,namalengkap,alamat) VALUES ('$username', '$hashed_password', '$email','$namalengkap','$alamat')";
+  mysqli_query($link, $sql);
+  header('location: ./login.php');
 }
 
 ?>
@@ -52,7 +52,7 @@ if (isset($_POST['btn_register'])) {
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .btn-register {
@@ -76,9 +76,9 @@ if (isset($_POST['btn_register'])) {
   </style>
 </head>
 
-<body class="d-flex align-items-center justify-content-center">
-  <div class="container">
-    <div class="card card-login">
+<body class="">
+  <div class="container py-3">
+    <div class="card card-login m-auto">
       <div class="card-header">
         <h2 class="mb-0">Registrasi Akun</h2>
       </div>
@@ -104,10 +104,11 @@ if (isset($_POST['btn_register'])) {
             <label for="alamat">alamat</label>
             <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukan alamat" required>
           </div>
-          <div class="form-group">
-            <a href="login.php" class="forgot-password">Sudah punya akun? Login</a>
+          <button type="submit" name="btn_register" class="btn btn-register w-100 mb-2">Registrasi</button>
+          <div class="text-center">
+            Sudah punya akun?
+            <a href="login.php" class="forgot-password text-primary text-decoration-none"> Login</a>
           </div>
-          <button type="submit" name="btn_register" class="btn btn-register btn-block">Registrasi</button>
         </form>
       </div>
     </div>

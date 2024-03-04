@@ -108,7 +108,7 @@ if (isset($_POST['btn_login'])) {
 
 <body class="d-flex align-items-center justify-content-center">
   <div class="container">
-    <div class="card card-login">
+    <div class="card card-login m-auto">
       <div class="card-header">
         <h2 class="mb-0">Login</h2>
       </div>
@@ -122,11 +122,14 @@ if (isset($_POST['btn_login'])) {
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
           </div>
-          <div class="form-group">
-            <a href="index.php" class="forgot-password">Masuk tanpa Login</a>
+          <button type="submit" name="btn_login" class="btn btn-login mb-3 w-100">Login</button>
+          <div class="text-center">
+            <p>
+              Belum punya akun?
+              <a href="registrasi.php" class="text-decoration-none">Register</a>
+            </p>
+            <a href="index.php" class="forgot-password text-decoration-none">Masuk tanpa Login</a>
           </div>
-          <button type="submit" name="btn_login" class="btn btn-login btn-block">Login</button>
-          <a href="registrasi.php" class="btn btn-register btn-block">Register</a>
         </form>
       </div>
     </div>
