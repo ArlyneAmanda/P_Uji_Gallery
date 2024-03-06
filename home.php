@@ -83,7 +83,7 @@ $sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=use
           <?php else : ?>
             <a href="aksi/foto/aksi_like.php?aksi=tambah&table=likefoto&foto_id=<?= $data['foto_id'] ?>&user_id=<?= $user_id ?>" class="btn btn-outline-danger btn-like"><i class="fas fa-heart"></i> belum Like</a>
           <?php endif ?>
-          <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModal<?= $data['foto_id'] ?>"><i class="fas fa-comment"></i> Comment</button>
+          <button class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#commentModalHome<?= $data['foto_id'] ?>"><i class="fas fa-comment"></i> Comment</button>
           <div class="ms-3 komen_li">
             <span>
               <?php
@@ -95,42 +95,7 @@ $sql = mysqli_query($link, "SELECT * FROM foto,user,album WHERE foto.user_id=use
           </div>
         </div>
       </div>
-      <!-- Modal untuk Komentar -->
-      <div class="modal fade" id="commentModal<?= $data['foto_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="commentModal<?= $data['foto_id'] ?>Label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="commentModal<?= $data['foto_id'] ?>Label">Comment</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form action="aksi/foto/aksi_like.php?aksi=tambah&table=komentarfoto" method="post">
-              <div class="modal-body">
-                <!-- Isi komentar atau form komentar dapat ditambahkan di sini -->
-                <div class="form-group">
-                  <label for="commentText">Your Comment:</label>
-                  <input type="text" name="isiKomentar" class="form-control" id="comment" placeholder="Komen disini">
-                  <input type="hidden" name="user_id" value="<?= $user_id ?>" class="form-control" id="comment" placeholder="Komen disini">
-                  <input type="hidden" name="foto_id" value="<?= $data['foto_id'] ?>" class="form-control" id="comment" placeholder="Komen disini">
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-                <hr>
-                <?php
-                $foto_id = $data['foto_id'];
-                $query_komen = mysqli_query($link, "SELECT * FROM komentarfoto,foto,user WHERE komentarfoto.foto_id=foto.foto_id AND komentarfoto.user_id=user.user_id AND foto.foto_id='$foto_id' ");
-                foreach ($query_komen as $data) :
-                ?>
-                  <b style="margin-right: 5px;"><?= $data['username'] ?></b><?= $data['isiKomentar'] ?><br>
-                <?php endforeach ?>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <?php include 'partials/comment.php'; ?>
+      <?php include 'partials/modals.php'; ?>
     <?php endforeach; ?>
   </div>
 
